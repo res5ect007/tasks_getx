@@ -14,11 +14,6 @@ class TaskController extends GetxController with ErrorController {
   var taskList = <Task>[].obs;
   var tasksMap = <String, Task>{}.obs ;
   var partnerTasks = <TaskElement>[].obs;
-  // @override
-  // void onInit() {
-  //   fetchTasks();
-  //   super.onInit();
-  // }
 
   Future<void> fetchTasks() async {
     GetStorage box = GetStorage();

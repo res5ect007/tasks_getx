@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tasks_getx/services/tranlations.dart';
 import 'package:tasks_getx/views/errors/no_connection_page.dart';
 import 'package:tasks_getx/views/pages/home_page.dart';
 import 'package:tasks_getx/views/pages/login_page.dart';
 import 'package:tasks_getx/views/pages/task_page.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           // bottomAppBarColor: Colors.blue,
           cardColor: Colors.blue[100],
           fontFamily: 'Nunito',
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         headline1: TextStyle(color: Colors.deepPurpleAccent),
         headline2: TextStyle(color: Colors.orange),
         bodyText2: TextStyle(color: Colors.black),

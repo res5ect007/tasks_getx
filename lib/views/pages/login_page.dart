@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tasks_getx/views/widgets/gradient_text.dart';
 import '../../controllers/login_controller.dart';
@@ -16,17 +17,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _userName = '';
   final TaskController taskController = Get.put(TaskController());
   final LoginController loginController = Get.put(LoginController());
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-  final GetStorage box = GetStorage();
-  
+  static final GetStorage box = GetStorage();
+
+  @override
+  void dispose() {
+    userNameController.dispose();
+    passwordController.dispose();
+    loginController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
+    _loadUserName();
+  }
+
+  _loadUserName() async {
+      _userName = await box.read('userName') ?? '';
+      userNameController.text = _userName.toString();
   }
 
   @override
@@ -85,11 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                         Text('enter'.tr,
                             style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w300)),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             final isValid = formKey.currentState!.validate();
                             if (isValid) {
-                              box.write('userName', userNameController.text.trim());
-                              box.write('password', passwordController.text.trim());
+                              await box.write('userName', userNameController.text.trim());
+                              await box.write('password', passwordController.text.trim());
                               taskController.fetchTasks();
                               Get.toNamed('/home');
                             }
