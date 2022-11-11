@@ -32,7 +32,7 @@ class TaskTile extends StatelessWidget {
                 ),
                 Text(
                   taskElement.discription,
-                  //maxLines: 100,
+                  maxLines: 100,
                   style: const TextStyle(fontSize: 15),
                 ),
                 const Spacer(),

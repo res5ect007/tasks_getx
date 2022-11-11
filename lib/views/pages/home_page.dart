@@ -23,9 +23,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-          child: const CircleAvatar(
+        leading: const Padding(
+          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          child: CircleAvatar(
             backgroundImage: AssetImage('assets/user_avatar2.png'),
             backgroundColor: Colors.transparent,
             radius: 22,
@@ -43,8 +43,7 @@ class HomePage extends StatelessWidget {
                       ? const Duration(milliseconds: 500)
                       : const Duration(milliseconds: 0), () {
                     itemScrollController.scrollTo(
-                        index: periodController.selectedPeriodIndex
-                            .value - 2,
+                        index: periodController.selectedPeriodIndex.value - 2,
                         curve: Curves.easeInOutCubic,
                         duration: const Duration(milliseconds: 1500));
                   });
@@ -58,13 +57,18 @@ class HomePage extends StatelessWidget {
                     .replaceAll(' ', '\n') ?? '...\n2999',
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontWeight: FontWeight.w600)),
-              style: ButtonStyle(),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(11.0))
+                    ),
+
+                  ),
             );
           }),
         ),
 
         ],
-        backgroundColor: Colors.blue,
+       //backgroundColor: Colors.transparent,
       ),
       body:Column(
             children: [
@@ -217,15 +221,13 @@ class HomePage extends StatelessWidget {
                                       baseColor: Colors.lightBlue,
                                       highlightColor: Colors.indigoAccent,
                                       child:  const Bottom()) : const Bottom(),
-                                ],
-                              ),
+                                ],),
                       ),
-                    )
-                  ],
+                    )],
                 );
-              })),
-            ],
-          )
+              })
+              ),
+            ],)
     );
   }
 }

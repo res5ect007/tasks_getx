@@ -7,6 +7,7 @@ class PeriodController extends GetxController {
   var selectedPeriodIndex = 0.obs;
   var isVisibleInPartners = false.obs;
   var periodData = {}.obs;
+  var periodAllData = {}.obs;
   final String currentLocale = Get.deviceLocale!.languageCode;
 
   @override
@@ -20,6 +21,7 @@ class PeriodController extends GetxController {
     DateTime now = DateTime.now();
     DateTime currentPeriod = DateTime(now.year, now.month, 1);
 
+    int j = 1;
     for (int i = 0; i < 60; i++){
       DateTime indexPeriod = DateTime(now.year, now.month + i - 30, 1);
 
@@ -28,8 +30,22 @@ class PeriodController extends GetxController {
       if (indexPeriod == currentPeriod) {
         selectedPeriodIndex.value = i;
       }
+
+      DateTime indexAllPeriod = indexPeriod;
+      int day = 1;
+
+      while (indexPeriod == DateTime(indexAllPeriod.year, indexAllPeriod.month, 1)) {
+        indexAllPeriod = DateTime(indexAllPeriod.year, indexAllPeriod.month, day);
+
+        if (indexPeriod == DateTime(indexAllPeriod.year, indexAllPeriod.month, 1)) {
+          periodAllData[j] = indexAllPeriod;
+          j++;
+        }
+
+        day++;
+      }
     }
-    return periodData;
+
   }
 
   convertPeriodToText(DateTime date, [bool substring = true, bool detailed = false]) {

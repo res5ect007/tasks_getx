@@ -82,7 +82,7 @@ class _TaskPageState extends State<TaskPage> {
                               fontSize: 17, fontWeight: FontWeight.w600)),
                     ],
                   ),
-                  BottomSheetTimeSelect(),
+                  BottomSheetTimeSelect(task: null),
                 ],
               ),
             ),
@@ -108,7 +108,7 @@ class _TaskPageState extends State<TaskPage> {
                               0.105 + (0.025 * heightIndex), 1),
                           popupWidget: AddPopupCard(
                               heroTag: 'editWidget$index',
-                              tasks: taskController.partnerTasks[index]),
+                              task: taskController.partnerTasks[index]),
                         );
 
                       // GestureDetector(
@@ -138,7 +138,7 @@ class _TaskPageState extends State<TaskPage> {
                 backgroundColor: Colors.blueAccent,
                 radius: 30,
                 child: Icon(Icons.add, color: Colors.white)),
-            popupWidget: AddPopupCard(heroTag: 'addButton')),
+            popupWidget: AddPopupCard(heroTag: 'addButton', task: null,)),
       );
     });
   }

@@ -31,31 +31,30 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           useMaterial3: true,
-          // primaryColor: Colors.blue,
+          primaryColor: Colors.blue,
           // bottomAppBarColor: Colors.blue,
           cardColor: Colors.blue[100],
           fontFamily: 'Nunito',
-    textTheme: const TextTheme(
-        headline1: TextStyle(color: Colors.deepPurpleAccent),
-        headline2: TextStyle(color: Colors.orange),
-        bodyText2: TextStyle(color: Colors.black),
-        subtitle1: TextStyle(color: Colors.black),
-      bodyText1:TextStyle(color: Colors.lightGreen),
-      subtitle2: TextStyle(color: Colors.black),
-      button: TextStyle(color: Colors.lightGreen),
-
-     ),
+          // textTheme: const TextTheme(
+          //   headline1: TextStyle(color: Colors.deepPurpleAccent),
+          //   headline2: TextStyle(color: Colors.orange),
+          //   bodyText2: TextStyle(color: Colors.black),
+          //   subtitle1: TextStyle(color: Colors.black),
+          //   bodyText1: TextStyle(color: Colors.lightGreen),
+          //   subtitle2: TextStyle(color: Colors.black),
+          //   button: TextStyle(color: Colors.lightGreen),
+          // ),
           //scaffoldBackgroundColor: Colors.blue,
           appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle.light, // 2
+            systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
-         useMaterial3: true,
+          useMaterial3: true,
           //primaryColor: Colors.blue,
           bottomAppBarColor: Colors.blue,
-         // cardColor: Colors.orangeAccent,
+          // cardColor: Colors.orangeAccent,
           fontFamily: 'Nunito',
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,

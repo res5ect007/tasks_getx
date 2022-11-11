@@ -68,6 +68,7 @@ class TaskElement {
     required this.done,
     required this.doneDate,
     required this.discription,
+    required this.comment,
     required this.time,
   });
 
@@ -75,7 +76,8 @@ class TaskElement {
   String status;
   bool done;
   DateTime doneDate;
-  String discription ;
+  String discription;
+  String comment;
   int time;
 
   factory TaskElement.fromJson(Map<String, dynamic> json) => TaskElement(
@@ -84,6 +86,7 @@ class TaskElement {
     done: json["Done"],
     doneDate: DateTime.fromMillisecondsSinceEpoch(json["DoneDate"]*1000),
     discription: json["Discription"],
+    comment: json["Comment"],
     time: json["Time"],
   );
 
@@ -93,6 +96,7 @@ class TaskElement {
     "Done": done,
     "DoneDate": doneDate,
     "Discription": discription,
+    "Comment": comment,
     "Time": time,
   };
 

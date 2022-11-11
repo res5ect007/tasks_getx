@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tasks_getx/views/widgets/gradient_text.dart';
 import '../../controllers/login_controller.dart';
@@ -17,7 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _userName = '';
   final TaskController taskController = Get.put(TaskController());
   final LoginController loginController = Get.put(LoginController());
   final TextEditingController userNameController = TextEditingController();
@@ -41,8 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _loadUserName() async {
-      _userName = await box.read('userName') ?? '';
-      userNameController.text = _userName.toString();
+      userNameController.text = box.read('userName') ?? '';
   }
 
   @override

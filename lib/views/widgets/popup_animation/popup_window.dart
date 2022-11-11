@@ -49,9 +49,10 @@ class PopupWindow extends StatelessWidget {
 /// Uses a [Hero] with tag [_heroAddTodo].
 /// {@endtemplate}
 class AddPopupCard extends StatefulWidget {
-  AddPopupCard({Key? key, required this.heroTag, this.tasks }) : super(key: key);
+
+  AddPopupCard({Key? key, required this.heroTag, required this.task}) : super(key: key);
   final String heroTag;
-  dynamic tasks;
+  late TaskElement? task;
 
   @override
   State<AddPopupCard> createState() => _AddPopupCardState();
@@ -62,12 +63,15 @@ class _AddPopupCardState extends State<AddPopupCard> {
   final TaskController taskController = Get.put(TaskController());
   final PeriodController periodController = Get.put(PeriodController());
   late TextEditingController discriptionController;
+  late TextEditingController commentController;
   late TextEditingController statusController;
 
   @override
   void initState() {
-    discriptionController = TextEditingController(text: widget.tasks == null ? '' : widget.tasks.discription);
-    statusController = TextEditingController(text: widget.tasks == null ? 'status_done'.tr : widget.tasks.status);
+    discriptionController = TextEditingController(text: widget.task?.discription);
+    commentController = TextEditingController(text: widget.task?.comment);
+    statusController = TextEditingController(text: widget.task == null ? 'status_done'.tr : widget.task?.status);
+    //doneDateController = DateTimeE
     super.initState();
   }
 
@@ -99,8 +103,7 @@ class _AddPopupCardState extends State<AddPopupCard> {
                         dropdownColor: Colors.blue,
                         icon: Icon(statusController.text.getIconForStatus(), size: 17, color: statusController.text.getIconColorForStatus()),
                         hint: Text('status'.tr),
-
-                        style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),
+                        style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w600),
                         items: taskStatus.map((value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -114,7 +117,7 @@ class _AddPopupCardState extends State<AddPopupCard> {
                         },
                       ),
                       const Spacer(),
-                      BottomSheetTimeSelect(detailed: true),
+                      BottomSheetTimeSelect(detailed: true, task: widget.task),
                     ]),
                      TextFormField(
                        controller: discriptionController,
@@ -126,11 +129,12 @@ class _AddPopupCardState extends State<AddPopupCard> {
                       ),
                       //cursorColor: MediaQuery.of(context).platformBrightness == Brightness.light ? Colors.black : Colors.white,
                     ),
-                    Divider(
+                    const Divider(
                       //color: MediaQuery.of(context).platformBrightness == Brightness.light ? Colors.black : Colors.white,
                       thickness: 1,
                     ),
                     TextFormField(
+                      controller: commentController,
                       decoration: InputDecoration(
                         hintText: 'comment'.tr,
                         border: InputBorder.none,
@@ -141,8 +145,10 @@ class _AddPopupCardState extends State<AddPopupCard> {
                     ),
                     TextButton(
                       onPressed: () {
-                        widget.tasks.status = statusController.text.trim();
-                         widget.tasks.discription = discriptionController.text.trim();
+                        widget.task?.status = statusController.text.trim();
+                        widget.task?.discription = discriptionController.text.trim();
+                        widget.task?.comment = commentController.text.trim();
+                        //widget.task?.doneDate = doneDateController.text.trim();
                         Get.back();
                       },
                       child: Text('ok'.tr),
